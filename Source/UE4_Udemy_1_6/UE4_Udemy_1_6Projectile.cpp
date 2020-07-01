@@ -3,6 +3,7 @@
 #include "UE4_Udemy_1_6Projectile.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Components/SphereComponent.h"
+#include  "Kismet/GameplayStatics.h"
 
 AUE4_Udemy_1_6Projectile::AUE4_Udemy_1_6Projectile() 
 {
@@ -39,5 +40,10 @@ void AUE4_Udemy_1_6Projectile::OnHit(UPrimitiveComponent* HitComp, AActor* Other
 		OtherComp->AddImpulseAtLocation(GetVelocity() * 100.0f, GetActorLocation());
 
 		Destroy();
+	}
+
+	if (ExplosionEffect)
+	{
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ExplosionEffect, GetActorLocation());
 	}
 }
